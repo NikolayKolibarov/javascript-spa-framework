@@ -1,4 +1,4 @@
-export default class AuthorizationService {
+class AuthorizationService {
     constructor(appKey, appSecret, baseServiceUrl) {
         this.appKey = appKey;
         this.appSecret = appSecret;

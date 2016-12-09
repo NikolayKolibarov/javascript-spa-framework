@@ -1,21 +1,39 @@
 (() => {
-    import Sammy from 'sammy';
-
-    import Requester from './utils/Requester';
-    import  AuthorizationService from './utils/AuthorizationService';
+    const selector = '#view-wrapper';
 
     const appKey = 'kid_SJFQs5PXl';
     const appSecret = 'kid_SJFQs5PXl';
     const baseServiceUrl = 'https://baas.kinvey.com/';
 
-    let router = Sammy(function () {
-        let AuthorizationService = new AuthorizationService(appKey, appSecret, baseServiceUrl);
-        let Requester = new Requester(AuthorizationService);
+    let authorizationService = new AuthorizationService(appKey, appSecret, baseServiceUrl);
+    let requester = new Requester(AuthorizationService);
 
-        this.get('#/', function () {
-        });
+    let homeViews = new HomeViews(),
+        userViews = new UserViews();
 
+    let userModel = new UserModel(requester);
+
+    let homeController = new HomeController(homeViews),
+        usersController = new UsersController(userViews, userModel);
+
+    initEventServices();
+
+    onRoute("#/", function () {
+        homeController.loadWelcomePage(selector);
     });
 
-    router.run('#/');
+    onRoute("#/login", function () {
+        usersController.loadLoginPage(selector);
+    });
+
+    onRoute("#/register", function () {
+        usersController.loadRegisterPage(selector);
+    });
+
+    onRoute("#/logout", function () {
+        usersController.logout();
+    });
+
+
+    run('#/');
 })();
