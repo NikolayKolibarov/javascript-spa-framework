@@ -1,18 +1,9 @@
-class AuthorizationService {
-    constructor(baseServiceUrl, appId, appSecret, guestUserCredentials) {
-        this.baseServiceUrl = baseServiceUrl;
-        this.appId = appId;
+export default class AuthorizationService {
+    constructor(appKey, appSecret, baseServiceUrl) {
+        this.appKey = appKey;
         this.appSecret = appSecret;
-        this._guestCredentials = guestUserCredentials;
-        this._appCredentials = btoa(appId + ":" + appSecret);
-    }
-
-    get authorizationType() {
-        return this._authorizationType;
-    }
-
-    set authorizationType(authorizationType) {
-        this._authorizationType = authorizationType;
+        this.baseServiceUrl = baseServiceUrl;
+        this._appCredentials = btoa(appKey + ":" + appSecret);
     }
 
     static getCurrentUser() {
@@ -23,24 +14,21 @@ class AuthorizationService {
         return AuthorizationService.getCurrentUser() != undefined;
     }
 
-    getAuthorizationHeaders(isGuest) {
-        let headers = {};
+    getAuthorizationHeaders(isJSON, useSession) {
+        let headers = {},
+            token;
 
-        if (AuthorizationService.isLoggedIn()) {
-            headers = {
-                'Authorization': this.authorizationType + ' ' + sessionStorage['_authToken']
-            };
-        } else if (!AuthorizationService.isLoggedIn() && isGuest) {
-            headers = {
-                'Authorization': this.authorizationType + ' ' + this._guestCredentials
-            };
-        } else if (!AuthorizationService.isLoggedIn() && !isGuest) {
-            headers = {
-                'Authorization': 'Basic' + ' ' + this._appCredentials
-            };
+        if (isJSON) {
+            headers['Content-Type'] = 'application/json';
         }
 
-        headers['Content-Type'] = 'application/json';
+        if (useSession) {
+            token = sessionStorage['sessionId'];
+            headers['Authorization'] = 'Kinvey ' + token;
+        } else {
+            token = this.appKey + ':' + this.appSecret;
+            headers['Authorization'] = 'Basic ' + btoa(token);
+        }
 
         return headers;
     }
