@@ -3,3 +3,7 @@
 
 #node_modules
 node_modules
+
+#other
+.DS_Store
+/js/.DS_Store
