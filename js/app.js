@@ -2,8 +2,8 @@
     const menu = '#menu';
     const wrapper = '#view-wrapper';
 
-    const appKey = 'kid_SJFQs5PXl';
-    const appSecret = 'de1ea738752e4d0fa93216855e6b6a46';
+    const appKey = 'kid_HJbOy0tQe';
+    const appSecret = 'd891ebad0ef4449292482b4a3d5f3321';
     const baseServiceUrl = 'https://baas.kinvey.com/';
 
     let authorizationService = new AuthorizationService(appKey, appSecret, baseServiceUrl);
@@ -11,13 +11,16 @@
 
     let menuViews = new MenuViews(),
         homeViews = new HomeViews(),
-        userViews = new UserViews();
+        userViews = new UserViews(),
+        achievementViews = new AchievementViews();
 
     let userModel = new UserModel(requester);
+    let achievementModel = new AchievementModel(requester);
 
     let menuController = new MenuController(menuViews),
         homeController = new HomeController(homeViews),
-        usersController = new UsersController(userViews, userModel);
+        usersController = new UsersController(userViews, userModel),
+        achievementsController = new AchievementsController(achievementViews, achievementModel);
 
     initEventServices();
 
@@ -35,32 +38,40 @@
     });
 
 
-    onRoute("#/", function () {
+    onRoute("#/",  () => {
         homeController.loadWelcomePage(wrapper);
     });
 
-    onRoute("#/login", function () {
+    onRoute("#/login",  ()  =>{
         usersController.loadLoginPage(wrapper);
     });
 
-    onRoute("#/register", function () {
+    onRoute("#/register",  () => {
         usersController.loadRegisterPage(wrapper);
     });
 
-    onRoute("#/logout", function () {
+    onRoute("#/logout",  () => {
         usersController.logout();
     });
 
-    onRoute("/user/profile", function () {
+    onRoute("#/user/profile",  () => {
         usersController.loadProfilePage(wrapper);
     });
 
+    onRoute("#/achievements", () => {
+        achievementsController.loadAllAchievementsPage(wrapper);
+    });
 
-    bindEventHandler('login', function (ev, data) {
+    onRoute("#/achievements/create", () => {
+        achievementsController.loadAddAchievementPage(wrapper);
+    });
+
+
+    bindEventHandler('login',  (ev, data)  =>{
         usersController.login(data);
     });
 
-    bindEventHandler('register', function (ev, data) {
+    bindEventHandler('register',  (ev, data) => {
         usersController.register(data);
     });
 

@@ -10,7 +10,6 @@ class UserModel {
     };
 
     register(data) {
-        console.log(this.serviceUrl);
         return this.requester.post(this.serviceUrl, data, false);
     };
 
