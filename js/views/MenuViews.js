@@ -7,7 +7,7 @@ class MenuViews {
 
     showMenuUser(selector, data) {
         $.get('templates/menu-user.html', function(templ) {
-            var renderedData = Mustache.render(templ, data);
+            let renderedData = Mustache.render(templ, data);
             $(selector).html(renderedData);
         })
     }

@@ -62,7 +62,7 @@
         achievementsController.loadAllAchievementsPage(wrapper);
     });
 
-    onRoute("#/achievements/create", () => {
+    onRoute("#/achievements/add", () => {
         achievementsController.loadAddAchievementPage(wrapper);
     });
 
@@ -74,6 +74,12 @@
     bindEventHandler('register',  (ev, data) => {
         usersController.register(data);
     });
+
+    bindEventHandler('addAchievement', (ev, data) => {
+        achievementsController.addAchievement(data);
+    });
+
+
 
 
 

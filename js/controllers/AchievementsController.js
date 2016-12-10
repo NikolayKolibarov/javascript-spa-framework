@@ -9,8 +9,23 @@ class AchievementsController {
         this.model.getAllAchievements()
             .then((success) => {
                 console.log(success);
+                let data = {
+                    achievements: success
+                };
 
-                this.view.showAllAchievements(selector, {data: success});
+                this.view.showAllAchievements(selector, data);
+            });
+    }
+
+    loadAddAchievementPage(selector) {
+        this.view.showAddAchievement(selector);
+    }
+
+    addAchievement(data) {
+        this.model.addAchievement(data)
+            .then((success) => {
+                console.log(success);
+                redirectUrl("#/achievements");
             });
     }
 }

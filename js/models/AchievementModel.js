@@ -8,4 +8,8 @@ class AchievementModel {
         return this.requester.get(this.serviceUrl, true);
     }
 
+    addAchievement(data) {
+        return this.requester.post(this.serviceUrl, data, true);
+    }
+
 }
