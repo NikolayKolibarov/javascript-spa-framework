@@ -24,6 +24,18 @@ class UserViews {
     showLoginPage(selector) {
         $.get('templates/login.html', (templ) => {
             $(selector).html(templ);
+
+            $('#loginButton').on('click', function () {
+                let username = $('#username').val();
+                let password = $('#password').val();
+
+                let data = {
+                    username: username,
+                    password: password,
+                };
+
+                triggerEvent('login', data);
+            });
         });
     }
 }
