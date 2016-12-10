@@ -7,7 +7,7 @@ class AuthorizationService {
     }
 
     static getCurrentUser() {
-        return sessionStorage['username'];
+        return sessionStorage['sessionId'];
     }
 
     static isLoggedIn() {

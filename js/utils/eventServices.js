@@ -19,6 +19,7 @@ function initEventServices() {
         this.bind('redirectUrl', function (ev, url) {
             this.redirect(url);
         });
+
     });
 
     _isInstanced = true;

@@ -1,5 +1,6 @@
 (() => {
-    const selector = '#view-wrapper';
+    const menu = '#menu';
+    const wrapper = '#view-wrapper';
 
     const appKey = 'kid_SJFQs5PXl';
     const appSecret = 'de1ea738752e4d0fa93216855e6b6a46';
@@ -8,26 +9,34 @@
     let authorizationService = new AuthorizationService(appKey, appSecret, baseServiceUrl);
     let requester = new Requester(authorizationService);
 
-    let homeViews = new HomeViews(),
+    let menuViews = new MenuViews(),
+        homeViews = new HomeViews(),
         userViews = new UserViews();
 
     let userModel = new UserModel(requester);
 
-    let homeController = new HomeController(homeViews),
+    let menuController = new MenuController(menuViews),
+        homeController = new HomeController(homeViews),
         usersController = new UsersController(userViews, userModel);
 
     initEventServices();
 
     onRoute("#/", function () {
-        homeController.loadWelcomePage(selector);
+        if(AuthorizationService.isLoggedIn()) {
+            menuController.loadMenuUser(menu);
+        } else {
+            menuController.loadMenuGuest(menu);
+        }
+
+        homeController.loadWelcomePage(wrapper);
     });
 
     onRoute("#/login", function () {
-        usersController.loadLoginPage(selector);
+        usersController.loadLoginPage(wrapper);
     });
 
     onRoute("#/register", function () {
-        usersController.loadRegisterPage(selector);
+        usersController.loadRegisterPage(wrapper);
     });
 
     onRoute("#/logout", function () {
