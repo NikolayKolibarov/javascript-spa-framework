@@ -10,6 +10,8 @@ class AuthorizationService {
         return sessionStorage['sessionId'];
     }
 
+
+
     static isLoggedIn() {
         return AuthorizationService.getCurrentUser() != undefined;
     }

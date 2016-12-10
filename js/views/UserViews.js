@@ -38,4 +38,11 @@ class UserViews {
             });
         });
     }
+
+    showProfilePage(selector, data) {
+        $.get('templates/profile.html', function(templ) {
+            var renderedData = Mustache.render(templ, data);
+            $(selector).html(renderedData);
+        })
+    }
 }

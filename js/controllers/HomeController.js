@@ -7,6 +7,7 @@ class HomeController {
     loadWelcomePage(selector) {
         this.view.showWelcomePage(selector);
     }
+
 }
 
 

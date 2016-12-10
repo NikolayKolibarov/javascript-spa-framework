@@ -47,8 +47,9 @@ function triggerEvent(event, data) {
 
     Sammy(function () {
         this.trigger(event, data);
-    });
+    })
 }
+
 
 function run(rootUrl) {
     _router.run(rootUrl);

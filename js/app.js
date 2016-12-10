@@ -21,13 +21,21 @@
 
     initEventServices();
 
-    onRoute("#/", function () {
-        if(AuthorizationService.isLoggedIn()) {
-            menuController.loadMenuUser(menu);
-        } else {
-            menuController.loadMenuGuest(menu);
-        }
+    Sammy(function () {
+        this.before({except: {path: '#/route'}}, function() {
 
+            if(AuthorizationService.isLoggedIn()) {
+                menuController.loadMenuUser(menu);
+            } else {
+                menuController.loadMenuGuest(menu);
+            }
+
+            this.log('not before #/route');
+        });
+    });
+
+
+    onRoute("#/", function () {
         homeController.loadWelcomePage(wrapper);
     });
 
@@ -41,6 +49,10 @@
 
     onRoute("#/logout", function () {
         usersController.logout();
+    });
+
+    onRoute("/user/profile", function () {
+        usersController.loadProfilePage(wrapper);
     });
 
 

@@ -12,6 +12,15 @@ class UsersController {
         this.view.showLoginPage(selector);
     }
 
+    loadProfilePage(selector) {
+        let data = {
+            username: sessionStorage['username'],
+            fullName: sessionStorage['fullName']
+        };
+
+        this.view.showProfilePage(selector, data);
+    }
+
     login(data) {
         return this.model.login(data)
             .then(function (success) {
