@@ -12,6 +12,10 @@ function initEventServices() {
     _router = Sammy(function () {
         //Here we put all pre-initialized functions, event handlers, and so on...
 
+        //overwrite because of sammy error
+        this.notFound = function(){
+        };
+
         this.bind('redirectUrl', function (ev, url) {
             this.redirect(url);
         });
@@ -39,6 +43,7 @@ function onRoute(route, routeHandler) {
 }
 
 function triggerEvent(event, data) {
+
     Sammy(function () {
         this.trigger(event, data);
     });

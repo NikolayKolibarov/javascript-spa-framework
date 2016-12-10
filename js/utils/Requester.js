@@ -5,23 +5,23 @@ class Requester {
     }
 
     get(url, useSession) {
-        let requestHeaders = this._getHeaders(true);
-        Requester._makeRequest('GET', url, null, requestHeaders);
+        let requestHeaders = this._getHeaders(false, useSession);
+        return Requester._makeRequest('GET', url, null, requestHeaders);
     }
 
     post(url, data, useSession) {
-        let requestHeaders = this._getHeaders(false);
-        Requester._makeRequest('POST', url, data, requestHeaders);
+        let requestHeaders = this._getHeaders(data, useSession);
+        return Requester._makeRequest('POST', url, data, requestHeaders);
     }
 
     put(url, data, useSession) {
-        let requestHeaders = this._getHeaders(false);
-        Requester._makeRequest('PUT', url, data, requestHeaders);
+        let requestHeaders = this._getHeaders(data, useSession);
+        return Requester._makeRequest('PUT', url, data, requestHeaders);
     }
 
     remove(url, data, useSession) {
-        let requestHeaders = this._getHeaders(false);
-        Requester._makeRequest('DELETE', url, data, requestHeaders);
+        let requestHeaders = this._getHeaders(false, useSession);
+        return Requester._makeRequest('DELETE', url, data, requestHeaders);
     }
 
     static _makeRequest(method, url, data, headers) {

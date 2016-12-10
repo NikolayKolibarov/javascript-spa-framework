@@ -1,20 +1,21 @@
 class UserModel {
     constructor(requester) {
         this.requester = requester;
-        this.serviceUrl = requester.baseServiceUrl + 'user/' + requester.appKey + '/';
+        this.serviceUrl = this.requester.authorizationService.baseServiceUrl + 'user/' + this.requester.authorizationService.appKey + '/';
     }
 
     login(data) {
-        var requestUrl = this.serviceUrl + 'login';
+        let requestUrl = this.serviceUrl + 'login';
         return this.requester.post(requestUrl, data, false);
     };
 
     register(data) {
+        console.log(this.serviceUrl);
         return this.requester.post(this.serviceUrl, data, false);
     };
 
     logout() {
-        var requestUrl = this.serviceUrl + '_logout';
+        let requestUrl = this.serviceUrl + '_logout';
         return this.requester.post(requestUrl, null, true);
     };
 }

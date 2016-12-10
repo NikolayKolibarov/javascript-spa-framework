@@ -11,6 +11,41 @@ class UsersController {
     loadLoginPage(selector) {
         this.view.showLoginPage(selector);
     }
+
+    login(data) {
+        return this.model.login(data)
+            .then(function (success) {
+                sessionStorage['sessionId'] = success._kmd.authtoken;
+                sessionStorage['username'] = success.username;
+                sessionStorage['fullName'] = success.fullName;
+                sessionStorage['userId'] = success._id;
+
+                redirectUrl('#/');
+
+
+            }).done();
+    };
+
+    register(data) {
+        return this.model.register(data)
+            .then(function (success) {
+                sessionStorage['sessionId'] = success._kmd.authtoken;
+                sessionStorage['username'] = success.username;
+                sessionStorage['fullName'] = success.fullName;
+                sessionStorage['userId'] = success._id;
+
+               redirectUrl('#/');
+            })
+            .done();
+    }
+
+    logout() {
+        this.model.logout()
+            .then(function () {
+                sessionStorage.clear();
+                redirectUrl('#/');
+            })
+    };
 }
 
 

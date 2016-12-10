@@ -15,7 +15,7 @@ class AuthorizationService {
     }
 
     getAuthorizationHeaders(isJSON, useSession) {
-        let headers = {},
+        var headers = {},
             token;
 
         if (isJSON) {
