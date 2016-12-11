@@ -12,8 +12,6 @@ class MenuController {
             username: sessionStorage['username']
         };
 
-        sessionStorage['']
-
         this.view.showMenuUser(selector, data);
     };
 

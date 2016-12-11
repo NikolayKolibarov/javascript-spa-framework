@@ -14,6 +14,10 @@ class AchievementsController {
                 };
 
                 this.view.showAllAchievements(selector, data);
+            })
+            .catch((error) => {
+                console.log(error);
+                handleAjaxError(error);
             });
     }
 
@@ -25,6 +29,7 @@ class AchievementsController {
         this.model.addAchievement(data)
             .then((success) => {
                 console.log(success);
+                showInfo('Achievement added successfully');
                 redirectUrl("#/achievements");
             });
     }

@@ -25,7 +25,7 @@
     initEventServices();
 
     Sammy(function () {
-        this.before({except: {path: '#/route'}}, function() {
+        this.before({except: {path: '#/route'}}, () => {
 
             if(AuthorizationService.isLoggedIn()) {
                 menuController.loadMenuUser(menu);
@@ -33,10 +33,10 @@
                 menuController.loadMenuGuest(menu);
             }
 
-            this.log('not before #/route');
         });
     });
 
+    $('section').hide();
 
     onRoute("#/",  () => {
         homeController.loadWelcomePage(wrapper);
@@ -78,10 +78,6 @@
     bindEventHandler('addAchievement', (ev, data) => {
         achievementsController.addAchievement(data);
     });
-
-
-
-
 
     run('#/');
 })();

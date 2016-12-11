@@ -34,10 +34,10 @@ class Requester {
             url: url,
             headers: headers,
             data: JSON.stringify(data) || null,
-            success: function (data) {
+            success:  (data) => {
                 defer.resolve(data);
             },
-            error: function (error) {
+            error: (error) => {
                 defer.reject(error);
             }
         });

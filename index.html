@@ -6,9 +6,13 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>JS SPA MVC</title>
+    <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
 <div id="menu"></div>
+<section id="loadingBox" class="loadingBox">Loading ...</section>
+<section id="infoBox" class="infoBox">Info</section>
+<section id="errorBox" class="errorBox">Error</section>
 <div id="view-wrapper"></div>
 <footer>Footer</footer>
 
@@ -17,6 +21,7 @@
 <script src="js/libs/mustache.min.js"></script>
 <script src="js/libs/sammy.js"></script>
 
+<script src="js/utils/notifications.js"></script>
 <script src="js/utils/eventServices.js"></script>
 <script src="js/utils/AuthorizationService.js"></script>
 <script src="js/utils/Requester.js"></script>

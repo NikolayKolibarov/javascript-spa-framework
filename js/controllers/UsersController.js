@@ -23,21 +23,26 @@ class UsersController {
 
     login(data) {
         return this.model.login(data)
-            .then(function (success) {
+            .then((success) => {
+                showInfo('Logged in successfully');
                 sessionStorage['sessionId'] = success._kmd.authtoken;
                 sessionStorage['username'] = success.username;
                 sessionStorage['fullName'] = success.fullName;
                 sessionStorage['userId'] = success._id;
 
                 redirectUrl('#/');
-
-
-            }).done();
+            })
+            .catch((error) => {
+                console.log(error);
+                handleAjaxError(error);
+            })
+            .done();
     };
 
     register(data) {
         return this.model.register(data)
-            .then(function (success) {
+            .then((success) => {
+                showInfo('Registered successfully');
                 sessionStorage['sessionId'] = success._kmd.authtoken;
                 sessionStorage['username'] = success.username;
                 sessionStorage['fullName'] = success.fullName;
@@ -45,15 +50,24 @@ class UsersController {
 
                redirectUrl('#/');
             })
+            .catch((error) => {
+                console.log(error);
+                handleAjaxError(error);
+            })
             .done();
     }
 
     logout() {
         this.model.logout()
-            .then(function () {
+            .then( () => {
+                showInfo('Logged out successfully');
                 sessionStorage.clear();
                 redirectUrl('#/');
             })
+            .error((error) => {
+                console.log(error);
+                handleAjaxError(error);
+            });
     };
 }
 

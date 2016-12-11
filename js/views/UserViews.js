@@ -3,7 +3,7 @@ class UserViews {
         $.get('templates/register.html', (templ) => {
             $(selector).html(templ);
 
-            $('#registerButton').on('click', function () {
+            $('#registerButton').on('click',  () => {
                 let username = $('#username').val();
                 let password = $('#password').val();
                 let fullName = $('#full-name').val();
@@ -25,7 +25,7 @@ class UserViews {
         $.get('templates/login.html', (templ) => {
             $(selector).html(templ);
 
-            $('#loginButton').on('click', function () {
+            $('#loginButton').on('click',  () => {
                 let username = $('#username').val();
                 let password = $('#password').val();
 
@@ -40,7 +40,7 @@ class UserViews {
     }
 
     showProfilePage(selector, data) {
-        $.get('templates/profile.html', function(templ) {
+        $.get('templates/profile.html', (templ) => {
             var renderedData = Mustache.render(templ, data);
             $(selector).html(renderedData);
         })

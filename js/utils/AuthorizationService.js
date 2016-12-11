@@ -3,7 +3,6 @@ class AuthorizationService {
         this.appKey = appKey;
         this.appSecret = appSecret;
         this.baseServiceUrl = baseServiceUrl;
-        this._appCredentials = btoa(appKey + ":" + appSecret);
     }
 
     static getCurrentUser() {
